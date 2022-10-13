@@ -9,7 +9,12 @@
 <ion-content [fullscreen]="true">
   <ion-item>
     <ion-label position="floating">Input 1</ion-label>
-    <ion-input [disabled]="input1Disabled" placeholder="Input 1" [(ngModel)]="input1Value"></ion-input>
+    <ion-input 
+      (ionBlur)="pierdeFoco()" 
+      (ionInput)="teclaPulsada()"
+      (ionChange)="cambiaValor()"  
+      (ionFocus)="tomaFoco()"
+    [disabled]="input1Disabled" placeholder="Input 1" [(ngModel)]="input1Value"></ion-input>
     <ion-button [disabled]="boton1Disabled" (click)="clickBoton1()">Boton 1</ion-button>
   </ion-item>
   <ion-item *ngIf="pulsadoBoton1">

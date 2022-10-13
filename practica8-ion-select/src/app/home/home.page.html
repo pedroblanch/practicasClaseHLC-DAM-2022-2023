@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-select placeholder="Seleccione asignatura" (ionChange)="cambiaAsignatura($event)">
+        <span *ngFor="let asignatura of asignaturas" [(ngModel)]='asignaturaSeleccionada'>
+          <ion-select-option value='{{asignatura}}'>{{asignatura}}</ion-select-option>
+        </span>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-content>

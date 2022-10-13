@@ -51,4 +51,20 @@ export class HomePage {
     }
   }
 
+  pierdeFoco(){
+    console.log("pierde el foco");
+  }
+
+  teclaPulsada(){
+    console.log("tecla pulsada");
+  }
+
+  cambiaValor(){
+    console.log("cambia valor");
+  }
+
+  tomaFoco(){
+    console.log("toma foco");
+  }
+
 }
