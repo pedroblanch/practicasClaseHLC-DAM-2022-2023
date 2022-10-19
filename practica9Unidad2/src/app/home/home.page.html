@@ -9,12 +9,21 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     <ion-item>
-      <ion-select placeholder="Seleccione producto" [(ngModel)]='productoSeleccionado'
+      <ion-select placeholder="Seleccione producto" [(ngModel)]='codigoSeleccionado'
         (ionChange)="seleccionadoProducto($event)">
         <span *ngFor="let producto of productos">
-          <ion-select-option value='{{producto}}'>{{producto.descripcion}}</ion-select-option>
+          <ion-select-option value={{producto.codigo}}>{{producto.descripcion}}</ion-select-option>
         </span>
       </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item *ngFor="let lineaDetalle of lineasDetalle">
+      <span class="my-label">{{lineaDetalle.codigo}}</span>
+      <span class="my-label">{{lineaDetalle.descripcion}}</span>
+      <span class="my-label">{{lineaDetalle.unidades}}</span>
+      <span class="my-label">{{lineaDetalle.pvp}}</span>
+      <span class="my-label">{{lineaDetalle.total}}</span>
     </ion-item>
   </ion-list>
 </ion-content>
