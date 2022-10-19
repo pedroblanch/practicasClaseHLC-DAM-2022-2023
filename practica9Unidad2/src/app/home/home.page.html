@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-select placeholder="Seleccione producto" [(ngModel)]='productoSeleccionado'
+        (ionChange)="seleccionadoProducto($event)">
+        <span *ngFor="let producto of productos">
+          <ion-select-option value='{{producto}}'>{{producto.descripcion}}</ion-select-option>
+        </span>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-content>
