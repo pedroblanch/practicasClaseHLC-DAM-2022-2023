@@ -14,6 +14,7 @@ export class HomePage {
   private codigoSeleccionado: number;
   private productos: Producto[] = [];
   private lineasDetalle: LineaDetalle[] = [];
+  private total:number=0.0;
 
   constructor(public alertController: AlertController) {
     this.productos.push(new Producto(1, "Producto 1", 10.3));
@@ -58,13 +59,19 @@ export class HomePage {
           handler: (data) => {
             let encontrado = false;
             let unidades = Number(data['unidades']);
+            //busco en el array de lineas de detalle una linea
+            //que tenga el mismo código de producto
             this.lineasDetalle.forEach((linea) => {
               if (linea.codigo == this.productoSeleccionado.codigo) {
                 //ya está añadido el producto
                 encontrado = true;
-                //actualizo las unidades y el total
+                //quito del total final el total del producto
+                this.total-=linea.total;
+                //actualizo las unidades y el total del producto
                 linea.unidades += unidades;
                 linea.total = linea.pvp * linea.unidades;
+                //actualizo el total final
+                this.total+=linea.total;
               }
             });
             if (!encontrado) {
@@ -77,6 +84,8 @@ export class HomePage {
                 this.productoSeleccionado.pvp * unidades
               );
               this.lineasDetalle.push(lineaDetalle);
+              //actualizo el total final
+              this.total+=lineaDetalle.total;
             }
             //borro la selección del ion-select
             this.codigoSeleccionado = null;
@@ -84,8 +93,36 @@ export class HomePage {
         }
       ]
     });
-
     await alert.present();
+  }//end_alertUnidadesProducto
+
+  eliminarLineaDetalle(i:number){
+    //actualizo el total final
+    this.total-=this.lineasDetalle[i].total;
+    //elimino la linea de detalle
+    this.lineasDetalle.splice(i,1);
   }
 
-}
+  async pedirConfirmacionBorrado(i:number) {
+    const alert = await this.alertController.create({
+      header: '¿Desea borrar?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          },
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.eliminarLineaDetalle(i);
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }//end_pedirConfirmacionBorrado
+
+}//end_class
