@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Alumno } from '../modelo/Alumno';
 
 @Component({
   selector: 'app-pagina2',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Pagina2Page implements OnInit {
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.queryParams.subscribe(params => {
+      let alumno:Alumno = JSON.parse(params["alumno"]);
+      console.log(alumno);
+    });
+  }
 
   ngOnInit() {
   }
@@ -16,7 +23,7 @@ export class Pagina2Page implements OnInit {
     console.log('ionViewWillLeave pagina2');
   }
 
-  ionViewDidLeave(){
+  ionViewDidLeave() {
     console.log('ionViewDidLeave pagina2');
   }
 

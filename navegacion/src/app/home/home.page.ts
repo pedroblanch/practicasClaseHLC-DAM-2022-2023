@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
 import { NavController, ViewWillEnter } from '@ionic/angular';
+import { Alumno } from '../modelo/Alumno';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit, ViewWillEnter{
+export class HomePage implements OnInit, ViewWillEnter {
 
-  constructor(public navCtrl:NavController) {
+  constructor(public navCtrl: NavController) {
     console.log('constructor home');
   }
-  
+
   ionViewWillEnter(): void {
     console.log('ionViewWillEnter home');
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     console.log('ionViewDidEnter home');
   }
 
@@ -24,16 +26,23 @@ export class HomePage implements OnInit, ViewWillEnter{
     console.log('ionViewWillLeave home');
   }
 
-  ionViewDidLeave(){
+  ionViewDidLeave() {
     console.log('ionViewDidLeave home');
   }
-  
+
   ngOnInit(): void {
     console.log('ngOnInit home');
   }
 
-  goToPagina2(){
-    this.navCtrl.navigateForward('/pagina2');
+  goToPagina2() {
+    let alumno: Alumno = new Alumno('27309418E', 'Ana', 'García Pérez');
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        alumno: JSON.stringify(alumno)
+      }
+
+    };
+    this.navCtrl.navigateForward('/pagina2',navigationExtras);
   }
 
 }
