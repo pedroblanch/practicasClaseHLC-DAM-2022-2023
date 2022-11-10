@@ -12,6 +12,7 @@ export class Pagina2Page implements OnInit {
 
   
   alumno: Alumno;
+  mensaje: string;
   
   constructor(private navCtrl: NavController, private activatedRoute: ActivatedRoute){
     this.activatedRoute.queryParams.subscribe(params => {
@@ -20,19 +21,14 @@ export class Pagina2Page implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.alumno.nombre);
-    console.log(this.alumno.apellidos);
-    console.log(this.alumno.edad);
-    console.log(this.alumno.dni);
-    if (this.alumno.edad > 17) {
-      console.log(this.alumno.estadoCivil);
-      console.log(this.alumno.trabaja);
-    } else {
-      console.log(this.alumno.apellidosPadre);
-      console.log(this.alumno.apellidosMadre);
-      console.log(this.alumno.dniMadre);
-      console.log(this.alumno.dniPadre);
-    }
+    this.mensaje="nombre: "+this.alumno.nombre+" "+this.alumno.apellidos;
+    this.mensaje+="\nedad: "+this.alumno.edad;
+    this.mensaje+="\ndni: "+this.alumno.dni;
+    this.mensaje+="\ndni padre: "+this.alumno.dniPadre;
+    this.mensaje+="\ndni padre: "+this.alumno.dniMadre;
+    this.mensaje+="\nsexo: "+this.alumno.sexo;
+    this.mensaje+="\ntrabaja: "+this.alumno.trabaja;
+    alert(this.mensaje);
   }
 
 }

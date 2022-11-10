@@ -62,7 +62,7 @@ export class HomePage {
         alumno: JSON.stringify(this.alumno)
       }
     };
-
+    console.log(this.alumno);
     this.navCtrl.navigateForward('/pagina2', navigationExtras);
 
   }
