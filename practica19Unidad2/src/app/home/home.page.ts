@@ -24,8 +24,8 @@ export class HomePage implements OnInit {
       apellidos: new FormControl('', Validators.required),
       edad: new FormControl('', Validators.required),
       sexo: new FormControl('', Validators.required),
-      dni: new FormControl('', Validators.required),
-      apellidosPadre: new FormControl('', Validators.required)
+      dni: new FormControl(''),
+      apellidosPadre: new FormControl('')
     }, { validators: [this.formularioNoValido()] });
   }
 

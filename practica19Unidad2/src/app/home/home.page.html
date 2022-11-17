@@ -32,19 +32,23 @@
       <ion-input type="number" formControlName="edad"></ion-input>
     </ion-item>
 
-    <ion-item *ngIf="getIntEdad()<18">
-      <ion-item>
-        <ion-label position="floating" color="primary">apellidos padre</ion-label>
-        <ion-input type="text" formControlName="apellidosPadre"></ion-input>
-      </ion-item>
-    </ion-item>
+    <div *ngIf="validations_form.get('edad').value">
 
-    <ion-item *ngIf="getIntEdad()>=18">
-      <ion-item>
-        <ion-label position="floating" color="primary">dni</ion-label>
-        <ion-input type="text" formControlName="dni"></ion-input>
+      <ion-item *ngIf="getIntEdad()<18">
+        <ion-item>
+          <ion-label position="floating" color="primary">apellidos padre</ion-label>
+          <ion-input type="text" formControlName="apellidosPadre"></ion-input>
+        </ion-item>
       </ion-item>
-    </ion-item>
+
+      <ion-item *ngIf="getIntEdad()>=18">
+        <ion-item>
+          <ion-label position="floating" color="primary">dni</ion-label>
+          <ion-input type="text" formControlName="dni"></ion-input>
+        </ion-item>
+      </ion-item>
+
+    </div>
 
     <ion-button color="primary" class="submit-btn" expand="block" type="submit" [disabled]="!validations_form.valid">
       Submit data
