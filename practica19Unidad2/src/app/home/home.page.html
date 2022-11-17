@@ -32,7 +32,7 @@
       <ion-input type="number" formControlName="edad"></ion-input>
     </ion-item>
 
-    <div *ngIf="validations_form.get('edad').value">
+    <div *ngIf="validations_form.get('edad').valid">
 
       <ion-item *ngIf="getIntEdad()<18">
         <ion-item>
