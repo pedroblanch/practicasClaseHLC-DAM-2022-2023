@@ -12,7 +12,7 @@ import { User } from '../modelo/user';
 export class HomePage implements OnInit {
 
   validations_form: FormGroup;
-  genders: Array<string>;
+  sexos: Array<string>;
   matching_passwords_group: FormGroup;
 
 
@@ -21,13 +21,17 @@ export class HomePage implements OnInit {
     private navCtrl: NavController) {
     this.validations_form = this.fb.group({
       nombre: new FormControl('', Validators.required),
-      apellidos: new FormControl('', Validators.required)
+      apellidos: new FormControl('', Validators.required),
+      edad: new FormControl('', Validators.required),
+      sexo: new FormControl('', Validators.required),
+      dni: new FormControl('', Validators.required),
+      apellidosPadre: new FormControl('', Validators.required)
     }, { validators: [this.formularioNoValido()] });
   }
 
   ngOnInit(): void {
 
-    this.genders = [
+    this.sexos = [
       "Hombre",
       "Mujer"
     ];
@@ -38,10 +42,14 @@ export class HomePage implements OnInit {
       const nombre: string = formGroup.get('nombre').value;
       const apellidos: string = formGroup.get('apellidos').value;
 
-      if (nombre !== apellidos) return { isValid: false };
-
+      if (false) return { isValid: false };
+      //en pruebas. Siempre devuelve true
       return null;
     };
+  }
+
+  getIntEdad(){
+    return(Number(this.validations_form.get('edad').value));
   }
 
   onSubmit(values) {
