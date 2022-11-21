@@ -13,6 +13,7 @@ export class HomePage implements OnInit {
 
   validations_form: FormGroup;
   sexos: Array<string>;
+  estadosCivil: Array<string>;
   matching_passwords_group: FormGroup;
 
 
@@ -25,7 +26,12 @@ export class HomePage implements OnInit {
       edad: new FormControl('', Validators.required),
       sexo: new FormControl('', Validators.required),
       dni: new FormControl(''),
-      apellidosPadre: new FormControl('')
+      trabaja: new FormControl(false),
+      estadoCivil: new FormControl(''),
+      dniPadre: new FormControl(''),
+      apellidosPadre: new FormControl(''),
+      dniMadre: new FormControl(''),
+      apellidosMadre: new FormControl('')
     }, { validators: [this.formularioNoValido()] });
   }
 
@@ -35,17 +41,48 @@ export class HomePage implements OnInit {
       "Hombre",
       "Mujer"
     ];
+
+    this.estadosCivil = [
+      "Soltero",
+      "Casado",
+      "Viudo",
+      "Divorciado"
+    ];
   }
 
   formularioNoValido(): ValidatorFn {
-    return (formGroup: FormGroup) => {
-      const nombre: string = formGroup.get('nombre').value;
-      const apellidos: string = formGroup.get('apellidos').value;
 
-      if (false) return { isValid: false };
-      //en pruebas. Siempre devuelve true
+    return (formGroup: FormGroup) => {
+      const edad: number = Number(formGroup.get('edad').value);
+      const dni: string = formGroup.get('dni').value;
+      const estadoCivil: string = formGroup.get('estadoCivil').value;
+      const dniPadre: string = formGroup.get('dniPadre').value;
+      const apellidosPadre: string = formGroup.get('apellidosPadre').value;
+      const dniMadre: string = formGroup.get('dniMadre').value;
+      const apellidosMadre: string = formGroup.get('apellidosMadre').value;
+
+      
+      if (edad>=18) {
+        if(!dni || !estadoCivil)
+          return { isValid: false };
+      }
+      if (edad<18) {
+        if(!dniPadre || !dniMadre || !apellidosPadre || !apellidosMadre)
+          return { isValid: false };
+      }
+      //en otro caso se valida
       return null;
     };
+  }
+
+  cambiaEdad(){
+    this.validations_form.controls['dniPadre'].setValue(null);
+    this.validations_form.controls['dniMadre'].setValue(null);
+    this.validations_form.controls['apellidosPadre'].setValue(null);
+    this.validations_form.controls['apellidosMadre'].setValue(null);
+    this.validations_form.controls['dni'].setValue(null);
+    this.validations_form.controls['trabaja'].setValue(null);
+    this.validations_form.controls['estadoCivil'].setValue(null);
   }
 
   getIntEdad(){

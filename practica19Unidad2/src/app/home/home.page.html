@@ -29,24 +29,49 @@
 
     <ion-item>
       <ion-label position="floating" color="primary">edad</ion-label>
-      <ion-input type="number" formControlName="edad"></ion-input>
+      <ion-input type="number" formControlName="edad" (ionChange)="cambiaEdad()"></ion-input>
     </ion-item>
 
     <div *ngIf="validations_form.get('edad').valid">
 
-      <ion-item *ngIf="getIntEdad()<18">
+      <div *ngIf="getIntEdad()<18">
+        <ion-item>
+          <ion-label position="floating" color="primary">dni padre</ion-label>
+          <ion-input type="text" formControlName="dniPadre"></ion-input>
+        </ion-item>
         <ion-item>
           <ion-label position="floating" color="primary">apellidos padre</ion-label>
           <ion-input type="text" formControlName="apellidosPadre"></ion-input>
         </ion-item>
-      </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="primary">dni madre</ion-label>
+          <ion-input type="text" formControlName="dniMadre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="primary">apellidos madre</ion-label>
+          <ion-input type="text" formControlName="apellidosMadre"></ion-input>
+        </ion-item>
+      </div>
 
-      <ion-item *ngIf="getIntEdad()>=18">
+      <div *ngIf="getIntEdad()>=18">
         <ion-item>
           <ion-label position="floating" color="primary">dni</ion-label>
           <ion-input type="text" formControlName="dni"></ion-input>
         </ion-item>
-      </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" color="primary">Estado civil</ion-label>
+          <ion-select formControlName="estadoCivil" cancelText="Cancel" okText="OK">
+            <ion-select-option *ngFor="let estadoCivil of estadosCivil" [value]="estadoCivil">{{estadoCivil}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+    
+
+        <ion-item>
+          <ion-label color="primary">Trabaja</ion-label>
+          <ion-checkbox color="primary" formControlName="trabaja"></ion-checkbox>
+        </ion-item>
+      </div>
 
     </div>
 
