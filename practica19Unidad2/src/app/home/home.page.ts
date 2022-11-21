@@ -25,7 +25,7 @@ export class HomePage implements OnInit {
       apellidos: new FormControl('', Validators.required),
       edad: new FormControl('', Validators.required),
       sexo: new FormControl('', Validators.required),
-      dni: new FormControl(''),
+      dni: new FormControl('', Validators.pattern('(^\s*$)|(^[0-9]{8}[AaBbCcDdEe]{1}$)')),
       trabaja: new FormControl(false),
       estadoCivil: new FormControl(''),
       dniPadre: new FormControl(''),
@@ -90,6 +90,8 @@ export class HomePage implements OnInit {
   }
 
   onSubmit(values) {
+
+    console.log(values);
     let user: User = new User(values.username,
       values.name, values.lastname, values.email, values.gender, values.terms);
     let navigationExtras: NavigationExtras = {
