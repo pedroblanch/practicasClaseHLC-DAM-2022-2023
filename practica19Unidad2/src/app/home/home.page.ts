@@ -16,6 +16,21 @@ export class HomePage implements OnInit {
   estadosCivil: Array<string>;
   matching_passwords_group: FormGroup;
 
+  validation_messages = {
+    'nombre': [
+      { type: 'required', message: 'nombre es requerido' }
+    ],
+    'apellidos': [
+      { type: 'required', message: 'apellidos es requerido' }
+    ],
+    'edad': [
+      { type: 'required', message: 'edad es requerido' }
+    ],
+    'dni': [
+      { type: 'pattern', message: 'formato incorrecto' }
+    ]
+  };
+
 
 
   constructor(private fb: FormBuilder,
@@ -61,13 +76,13 @@ export class HomePage implements OnInit {
       const dniMadre: string = formGroup.get('dniMadre').value;
       const apellidosMadre: string = formGroup.get('apellidosMadre').value;
 
-      
-      if (edad>=18) {
-        if(!dni || !estadoCivil)
+
+      if (edad >= 18) {
+        if (!dni || !estadoCivil)
           return { isValid: false };
       }
-      if (edad<18) {
-        if(!dniPadre || !dniMadre || !apellidosPadre || !apellidosMadre)
+      if (edad < 18) {
+        if (!dniPadre || !dniMadre || !apellidosPadre || !apellidosMadre)
           return { isValid: false };
       }
       //en otro caso se valida
@@ -75,7 +90,7 @@ export class HomePage implements OnInit {
     };
   }
 
-  cambiaEdad(){
+  cambiaEdad() {
     this.validations_form.controls['dniPadre'].setValue(null);
     this.validations_form.controls['dniMadre'].setValue(null);
     this.validations_form.controls['apellidosPadre'].setValue(null);
@@ -85,8 +100,8 @@ export class HomePage implements OnInit {
     this.validations_form.controls['estadoCivil'].setValue(null);
   }
 
-  getIntEdad(){
-    return(Number(this.validations_form.get('edad').value));
+  getIntEdad() {
+    return (Number(this.validations_form.get('edad').value));
   }
 
   onSubmit(values) {
