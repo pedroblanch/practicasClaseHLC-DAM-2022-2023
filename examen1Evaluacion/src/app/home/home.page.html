@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Partidos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list *ngIf="!altaPartido && !gestionarMarcador">
+    <ion-item *ngFor="let partido of partidos" (click)="partidoClick(partido)">
+      <ion-text>
+        {{partido.equipoLocal}} - {{partido.puntosLocal}}
+        <br>
+        {{partido.equipoVisitante}} - {{partido.puntosVisitante}}
+      </ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-item *ngIf="!gestionarMarcador">
+    <ion-checkbox slot="end" [(ngModel)]="altaPartido" (ionChange)="altaPartidoChange()"></ion-checkbox>
+    <ion-label>Nuevo partido </ion-label>
+  </ion-item>
+
+  <form *ngIf="altaPartido && !gestionarMarcador" [formGroup]="validations_form"
+    (ngSubmit)="onSubmit(validations_form.value)">
+    <ion-item>
+      <ion-label position="floating" color="primary">local</ion-label>
+      <ion-input type="text" formControlName="equipoLocal"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">visitante</ion-label>
+      <ion-input type="text" formControlName="equipoVisitante"></ion-input>
+    </ion-item>
+
+    <ion-button color="primary" class="submit-btn" expand="block" type="submit" [disabled]="!validations_form.valid">
+      Submit data</ion-button>
+  </form>
+
+  <div *ngIf="gestionarMarcador">
+    <ion-item *ngIf="!editandoMarcadorLocal">
+      <ion-text>
+        {{partido.equipoLocal}}
+        <br>
+        {{partido.puntosLocal}}
+      </ion-text>
+      <ion-button (click)="cambiarMarcadorLocal(1)">+1</ion-button>
+      <ion-button (click)="cambiarMarcadorLocal(2)">+2</ion-button>
+      <ion-button (click)="cambiarMarcadorLocal(3)">+3</ion-button>
+      <ion-button (click)="editarMarcadorLocal()">editar</ion-button>
+    </ion-item>
+    <ion-item *ngIf="editandoMarcadorLocal">
+      <ion-label position="floating" color="primary"> puntos {{partido.equipoLocal}}</ion-label>
+      <ion-input type="number" [(ngModel)]="partido.puntosLocal"></ion-input>
+      <ion-button (click)="editarMarcadorLocal()">editar</ion-button>
+    </ion-item>
+    <ion-item *ngIf="!editandoMarcadorVisitante">
+      <ion-text>
+        {{partido.equipoVisitante}}
+        <br>
+        {{partido.puntosVisitante}}
+      </ion-text>
+      <ion-button (click)="cambiarMarcadorVisitante(1)">+1</ion-button>
+      <ion-button (click)="cambiarMarcadorVisitante(2)">+2</ion-button>
+      <ion-button (click)="cambiarMarcadorVisitante(3)">+3</ion-button>
+      <ion-button (click)="editarMarcadorVisitante()">editar</ion-button>
+    </ion-item>
+    <ion-item *ngIf="editandoMarcadorVisitante">
+      <ion-label position="floating" color="primary"> puntos {{partido.equipoVisitante}}</ion-label>
+      <ion-input type="number" [(ngModel)]="partido.puntosVisitante"></ion-input>
+      <ion-button (click)="editarMarcadorVisitante()">editar</ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-button (click)="cerrarGestionMarcador()">Volver</ion-button>
+    </ion-item>
+  </div>
+
+</ion-content>
