@@ -1,0 +1,7 @@
+{
+  "name": "pruebasIonGrid",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

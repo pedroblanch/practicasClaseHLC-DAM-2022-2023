@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "pruebasIonGrid",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
